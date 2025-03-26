@@ -1,1 +1,215 @@
-<p>Hello World</p>
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CartoonFotos.de - Verwandle deine Fotos in Cartoons</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .hero {
+        background-color: #f8f9fa;
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .benefits {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .benefit-item {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .examples {
+        margin: 4rem 0;
+      }
+
+      .pricing-toggle {
+        margin: 3rem 0;
+      }
+
+      .upload-section {
+        margin: 3rem 0;
+      }
+
+      .preview-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .preview-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .steps {
+        background-color: #f8f9fa;
+        padding: 3rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="container">
+        <h1 class="display-4">
+          Verwandle deine Fotos in einzigartige Cartoons
+        </h1>
+        <p class="lead">
+          Professionelle Cartoon-Umwandlung - schnell, einfach und günstig
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="benefits">
+        <div class="benefit-item">
+          <h3>Einfach</h3>
+          <p>Fotos hochladen und fertig!</p>
+        </div>
+        <div class="benefit-item">
+          <h3>Schnell</h3>
+          <p>Ergebnis in 24 Stunden</p>
+        </div>
+        <div class="benefit-item">
+          <h3>Günstig</h3>
+          <p>Bereits ab 0,99€ pro Bild</p>
+        </div>
+      </div>
+
+      <div class="examples">
+        <h2 class="text-center mb-4">
+          Beispiele unserer Cartoon-Verwandlungen
+        </h2>
+        <div class="row">
+          <!-- Hier können die Beispielbilder eingefügt werden -->
+          <div class="col-md-4">
+            <img
+              src="beispiel1.jpg"
+              class="img-fluid"
+              alt="Vorher-Nachher Beispiel 1"
+            />
+          </div>
+          <div class="col-md-4">
+            <img
+              src="beispiel2.jpg"
+              class="img-fluid"
+              alt="Vorher-Nachher Beispiel 2"
+            />
+          </div>
+          <div class="col-md-4">
+            <img
+              src="beispiel3.jpg"
+              class="img-fluid"
+              alt="Vorher-Nachher Beispiel 3"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-toggle text-center">
+        <h2 class="mb-4">Wähle dein Paket</h2>
+        <div class="btn-group" role="group">
+          <input
+            type="radio"
+            class="btn-check"
+            name="package"
+            id="single"
+            checked
+          />
+          <label class="btn btn-outline-primary" for="single"
+            >1 Bild für 0,99€</label
+          >
+
+          <input type="radio" class="btn-check" name="package" id="multi" />
+          <label class="btn btn-outline-primary" for="multi"
+            >5 Bilder für 2,99€ (Spare 40%!)</label
+          >
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="container">
+          <h2 class="text-center mb-4">So einfach geht's</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <h4>1. Bilder hochladen & bezahlen</h4>
+              <p>Lade deine Fotos hoch und bezahle sicher online</p>
+            </div>
+            <div class="col-md-4">
+              <h4>2. Wir erstellen deine Cartoons</h4>
+              <p>Unsere Künstler verwandeln deine Fotos in tolle Cartoons</p>
+            </div>
+            <div class="col-md-4">
+              <h4>3. Fertige Bilder per E-Mail</h4>
+              <p>Du erhältst deine Cartoons innerhalb von 24 Stunden</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="upload-section">
+        <h2 class="text-center mb-4">Lade deine Bilder hoch</h2>
+        <div class="text-center">
+          <input
+            type="file"
+            class="form-control mb-3"
+            id="imageUpload"
+            multiple
+            accept="image/*"
+          />
+          <div class="preview-images" id="imagePreview">
+            <!-- Hier werden die Vorschaubilder angezeigt -->
+          </div>
+          <button class="btn btn-primary btn-lg" id="submitButton">
+            Weiter zur Bezahlung
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Bildvorschau-Funktionalität
+      document
+        .getElementById("imageUpload")
+        .addEventListener("change", function (e) {
+          const preview = document.getElementById("imagePreview");
+          preview.innerHTML = "";
+
+          const files = e.target.files;
+          const maxFiles = document.getElementById("single").checked ? 1 : 5;
+
+          for (let i = 0; i < Math.min(files.length, maxFiles); i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              img.className = "preview-image";
+              preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Paketauswahl-Funktionalität
+      document.querySelectorAll('[name="package"]').forEach((radio) => {
+        radio.addEventListener("change", function () {
+          document.getElementById("imageUpload").value = "";
+          document.getElementById("imagePreview").innerHTML = "";
+        });
+      });
+    </script>
+  </body>
+</html>
