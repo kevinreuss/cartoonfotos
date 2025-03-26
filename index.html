@@ -188,8 +188,19 @@
           const files = e.target.files;
           const maxFiles = document.getElementById("single").checked ? 1 : 5;
 
-          for (let i = 0; i < Math.min(files.length, maxFiles); i++) {
-            const file = files[i];
+          // Überprüfe die korrekte Anzahl der Dateien
+          if (files.length !== maxFiles) {
+            alert(
+              `Bitte wählen Sie genau ${maxFiles} Bild${
+                maxFiles > 1 ? "er" : ""
+              } aus.`
+            );
+            this.value = ""; // Reset file input
+            return;
+          }
+
+          // Zeige alle ausgewählten Bilder an
+          Array.from(files).forEach((file) => {
             const reader = new FileReader();
 
             reader.onload = function (e) {
@@ -200,13 +211,26 @@
             };
 
             reader.readAsDataURL(file);
-          }
+          });
         });
 
       // Paketauswahl-Funktionalität
       document.querySelectorAll('[name="package"]').forEach((radio) => {
         radio.addEventListener("change", function () {
-          document.getElementById("imageUpload").value = "";
+          const imageUpload = document.getElementById("imageUpload");
+          const maxFiles = document.getElementById("single").checked ? 1 : 5;
+
+          // Update die maximal erlaubte Anzahl von Dateien
+          imageUpload.setAttribute("multiple", maxFiles > 1 ? "" : null);
+
+          // Aktualisiere den Placeholder-Text
+          imageUpload.setAttribute(
+            "placeholder",
+            `${maxFiles} Bild${maxFiles > 1 ? "er" : ""} auswählen`
+          );
+
+          // Reset Upload und Vorschau
+          imageUpload.value = "";
           document.getElementById("imagePreview").innerHTML = "";
         });
       });
