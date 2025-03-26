@@ -15,7 +15,7 @@
       }
 
       .hero {
-        background: linear-gradient(135deg, #7f7fd5, #86a8e7, #91eae4);
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
         text-align: center;
         color: white;
         padding: 5rem 0;
@@ -37,7 +37,7 @@
         min-width: 250px;
         background: white;
         border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
       }
 
@@ -103,12 +103,12 @@
       }
 
       .step-item h4 {
-        color: #7f7fd5;
+        color: #ff6b6b;
         margin-bottom: 1rem;
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, #7f7fd5, #86a8e7);
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
         border: none;
         padding: 0.8rem 2rem;
         transition: transform 0.3s ease;
@@ -116,16 +116,16 @@
 
       .btn-primary:hover {
         transform: translateY(-2px);
-        background: linear-gradient(135deg, #86a8e7, #7f7fd5);
+        background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
       }
 
       .btn-outline-primary {
-        border-color: #7f7fd5;
-        color: #7f7fd5;
+        border-color: #ff6b6b;
+        color: #ff6b6b;
       }
 
       .btn-outline-primary:hover {
-        background: linear-gradient(135deg, #7f7fd5, #86a8e7);
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
         border-color: transparent;
       }
 
@@ -295,7 +295,14 @@
           <div class="preview-images" id="imagePreview">
             <!-- Hier werden die Vorschaubilder angezeigt -->
           </div>
-          <button class="btn btn-primary btn-lg" id="submitButton">
+          <button
+            class="btn btn-primary btn-lg"
+            id="submitButton"
+            style="
+              --bs-btn-active-bg: #4ecdc4;
+              --bs-btn-active-border-color: #4ecdc4;
+            "
+          >
             Weiter zur Bezahlung
           </button>
         </div>
