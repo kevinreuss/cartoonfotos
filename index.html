@@ -412,10 +412,10 @@
         const files = e.target.files;
         const maxFiles = document.getElementById("single").checked ? 1 : 5;
 
-        // Überprüfe die korrekte Anzahl der Dateien
-        if (files.length !== maxFiles) {
+        // Überprüfe nur auf zu wenige Dateien
+        if (files.length < maxFiles) {
           alert(
-            `Bitte wählen Sie genau ${maxFiles} Bild${
+            `Bitte wählen Sie mindestens ${maxFiles} Bild${
               maxFiles > 1 ? "er" : ""
             } aus.`
           );
@@ -424,19 +424,21 @@
           return;
         }
 
-        // Zeige alle ausgewählten Bilder an
-        Array.from(files).forEach((file) => {
-          const reader = new FileReader();
+        // Zeige nur die erlaubte Anzahl von Bildern an
+        Array.from(files)
+          .slice(0, maxFiles) // Nimm nur die ersten maxFiles Bilder
+          .forEach((file) => {
+            const reader = new FileReader();
 
-          reader.onload = function (e) {
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.className = "preview-image";
-            preview.appendChild(img);
-          };
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              img.className = "preview-image";
+              preview.appendChild(img);
+            };
 
-          reader.readAsDataURL(file);
-        });
+            reader.readAsDataURL(file);
+          });
         
         validateForm();
       });
