@@ -492,14 +492,14 @@
         const isSinglePackage = document.getElementById("single").checked;
 
         try {
-          // Sende jedes Bild in einer separaten Anfrage
+          // Sende jedes Bild einzeln
           for (let i = 0; i < files.length; i++) {
             const formData = new FormData();
             formData.append("email", email);
             formData.append("package", isSinglePackage ? "1 Bild" : "5 Bilder");
             formData.append("access_key", "7faad0d1-99c2-433f-bb35-93597db07fb1");
             formData.append("image_number", `${i + 1} von ${files.length}`);
-            formData.append(`file`, files[i]);
+            formData.append("file", files[i]);
 
             const response = await fetch("https://api.web3forms.com/submit", {
               method: "POST",
@@ -507,9 +507,7 @@
             });
 
             const data = await response.json();
-            if (!data.success) {
-              throw new Error(`Fehler beim Upload von Bild ${i + 1}`);
-            }
+            if (!data.success) throw new Error(`Fehler beim Upload von Bild ${i + 1}`);
           }
 
           alert("Vielen Dank! Ihre Bestellung wurde erfolgreich übermittelt. Sie erhalten Ihre Cartoons innerhalb von 24 Stunden per E-Mail.");
