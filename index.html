@@ -297,7 +297,7 @@
 
     <section class="upload-section">
       <div class="upload-container">
-        <h2 class="text-center mb-4">Lade deine Bilder hoch</h2>
+        <h2 class="text-center mb-4" id="uploadTitle">Lade dein Bild hoch</h2>
         <div class="text-center">
           <input
             type="file"
@@ -365,15 +365,15 @@
         radio.addEventListener("change", function () {
           const imageUpload = document.getElementById("imageUpload");
           const maxFiles = document.getElementById("single").checked ? 1 : 5;
+          const uploadTitle = document.getElementById("uploadTitle");
+
+          // Update den Titel basierend auf der Paketauswahl
+          uploadTitle.textContent = maxFiles === 1 
+            ? "Lade dein Bild hoch" 
+            : "Lade deine 5 Bilder hoch";
 
           // Update die maximal erlaubte Anzahl von Dateien
           imageUpload.setAttribute("multiple", maxFiles > 1 ? "" : null);
-
-          // Aktualisiere den Placeholder-Text
-          imageUpload.setAttribute(
-            "placeholder",
-            `${maxFiles} Bild${maxFiles > 1 ? "er" : ""} auswählen`
-          );
 
           // Reset Upload und Vorschau
           imageUpload.value = "";
