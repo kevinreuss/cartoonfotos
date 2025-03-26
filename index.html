@@ -355,6 +355,7 @@
               id="emailInput"
               placeholder="Ihre E-Mail-Adresse"
               required
+              autocomplete="email"
             />
           </div>
 
@@ -369,53 +370,76 @@
           <button
             class="btn btn-primary btn-lg"
             id="submitButton"
+            disabled
             style="
               --bs-btn-active-bg: #4ecdc4;
               --bs-btn-active-border-color: #4ecdc4;
             "
           >
-            Weiter zur Bezahlung
+            <span id="buttonText">Weiter zur Bezahlung</span>
+            <span id="loadingSpinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status">
+              <span class="visually-hidden">Laden...</span>
+            </span>
           </button>
         </div>
       </div>
     </section>
 
     <script>
-      // Bildvorschau-Funktionalität
-      document
-        .getElementById("imageUpload")
-        .addEventListener("change", function (e) {
-          const preview = document.getElementById("imagePreview");
-          preview.innerHTML = "";
+      // Funktion zur Überprüfung der Formulareingaben
+      function validateForm() {
+        const email = document.getElementById("emailInput").value;
+        const agbAccepted = document.getElementById("agbCheck").checked;
+        const files = document.getElementById("imageUpload").files;
+        const maxFiles = document.getElementById("single").checked ? 1 : 5;
+        const submitButton = document.getElementById("submitButton");
 
-          const files = e.target.files;
-          const maxFiles = document.getElementById("single").checked ? 1 : 5;
+        const isValid = email && 
+                       agbAccepted && 
+                       files.length > 0 && 
+                       files.length === maxFiles;
 
-          // Überprüfe die korrekte Anzahl der Dateien
-          if (files.length !== maxFiles) {
-            alert(
-              `Bitte wählen Sie genau ${maxFiles} Bild${
-                maxFiles > 1 ? "er" : ""
-              } aus.`
-            );
-            this.value = ""; // Reset file input
-            return;
-          }
+        submitButton.disabled = !isValid;
+      }
 
-          // Zeige alle ausgewählten Bilder an
-          Array.from(files).forEach((file) => {
-            const reader = new FileReader();
+      // Event Listener für alle Formularfelder
+      document.getElementById("emailInput").addEventListener("input", validateForm);
+      document.getElementById("agbCheck").addEventListener("change", validateForm);
+      document.getElementById("imageUpload").addEventListener("change", function(e) {
+        const preview = document.getElementById("imagePreview");
+        preview.innerHTML = "";
 
-            reader.onload = function (e) {
-              const img = document.createElement("img");
-              img.src = e.target.result;
-              img.className = "preview-image";
-              preview.appendChild(img);
-            };
+        const files = e.target.files;
+        const maxFiles = document.getElementById("single").checked ? 1 : 5;
 
-            reader.readAsDataURL(file);
-          });
+        // Überprüfe die korrekte Anzahl der Dateien
+        if (files.length !== maxFiles) {
+          alert(
+            `Bitte wählen Sie genau ${maxFiles} Bild${
+              maxFiles > 1 ? "er" : ""
+            } aus.`
+          );
+          this.value = ""; // Reset file input
+          validateForm();
+          return;
+        }
+
+        // Zeige alle ausgewählten Bilder an
+        Array.from(files).forEach((file) => {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.className = "preview-image";
+            preview.appendChild(img);
+          };
+
+          reader.readAsDataURL(file);
         });
+        
+        validateForm();
+      });
 
       // Paketauswahl-Funktionalität
       document.querySelectorAll('[name="package"]').forEach((radio) => {
@@ -424,17 +448,16 @@
           const maxFiles = document.getElementById("single").checked ? 1 : 5;
           const uploadTitle = document.getElementById("uploadTitle");
 
-          // Update den Titel basierend auf der Paketauswahl
           uploadTitle.textContent = maxFiles === 1 
             ? "Lade dein Bild hoch" 
             : "Lade deine 5 Bilder hoch";
 
-          // Update die maximal erlaubte Anzahl von Dateien
           imageUpload.setAttribute("multiple", maxFiles > 1 ? "" : null);
 
           // Reset Upload und Vorschau
           imageUpload.value = "";
           document.getElementById("imagePreview").innerHTML = "";
+          validateForm();
         });
       });
 
@@ -442,22 +465,24 @@
       document.getElementById("submitButton").addEventListener("click", async function(e) {
         e.preventDefault();
         
+        const submitButton = document.getElementById("submitButton");
+        const buttonText = document.getElementById("buttonText");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        
+        // Disable button and show loading state
+        submitButton.disabled = true;
+        buttonText.textContent = "Bestellung wird erstellt";
+        loadingSpinner.classList.remove("d-none");
+        
         const email = document.getElementById("emailInput").value;
-        const agbAccepted = document.getElementById("agbCheck").checked;
         const files = document.getElementById("imageUpload").files;
         const isSinglePackage = document.getElementById("single").checked;
-        
-        if (!email || !agbAccepted || files.length === 0) {
-          alert("Bitte füllen Sie alle Pflichtfelder aus und laden Sie Bilder hoch.");
-          return;
-        }
 
         const formData = new FormData();
         formData.append("email", email);
         formData.append("package", isSinglePackage ? "1 Bild" : "5 Bilder");
         formData.append("access_key", "7faad0d1-99c2-433f-bb35-93597db07fb1");
         
-        // Append all files
         Array.from(files).forEach((file, index) => {
           formData.append(`file${index + 1}`, file);
         });
@@ -483,6 +508,11 @@
         } catch (error) {
           alert("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.");
           console.error(error);
+        } finally {
+          // Reset button state
+          buttonText.textContent = "Weiter zur Bezahlung";
+          loadingSpinner.classList.add("d-none");
+          validateForm();
         }
       });
     </script>
