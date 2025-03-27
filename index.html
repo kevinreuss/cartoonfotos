@@ -69,10 +69,10 @@
 
       .pricing-section {
         background-color: white;
+        padding: 2rem 0 0 0;
       }
 
       .pricing-toggle {
-        margin: 3rem auto;
         max-width: 1200px;
         padding: 0 1rem;
       }
@@ -156,7 +156,7 @@
       }
 
       .upload-section {
-        background-color: #f8f9fa;
+        background-color: white;
       }
 
       .upload-container {
@@ -296,7 +296,7 @@
 
     <section class="steps">
       <div class="steps-container">
-        <h2 class="text-center mb-4">So einfach geht's</h2>
+        <h2 class="text-center mb-4">So einfach geht's:</h2>
         <div class="row">
           <div class="col-12 col-md-4">
             <div class="step-item">
@@ -324,7 +324,7 @@
 
     <section class="pricing-section">
       <div class="pricing-toggle text-center">
-        <h2 class="mb-4">Wähle hier dein Paket:</h2>
+        <h2 class="mb-4">1. Wähle dein Paket:</h2>
         <div class="btn-group" role="group">
           <input
             type="radio"
@@ -347,7 +347,7 @@
 
     <section class="upload-section">
       <div class="upload-container">
-        <h2 class="text-center mb-4" id="uploadTitle">Lade dein Bild hoch</h2>
+        <h2 class="text-center mb-4" id="uploadTitle">2. Lade dein Bild hoch:</h2>
         <div class="text-center">
           <input
             type="file"
@@ -390,7 +390,7 @@
               --bs-btn-active-border-color: #4ecdc4;
             "
           >
-            <span id="buttonText">Weiter zur Bezahlung</span>
+            <span id="buttonText">Fotos bestellen</span>
             <span id="loadingSpinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status">
               <span class="visually-hidden">Laden...</span>
             </span>
@@ -496,8 +496,8 @@
           const uploadTitle = document.getElementById("uploadTitle");
 
           uploadTitle.textContent = maxFiles === 1 
-            ? "Lade dein Bild hoch" 
-            : "Lade deine 5 Bilder hoch";
+            ? "2. Lade dein Bild hoch:" 
+            : "2. Lade deine 5 Bilder hoch:";
 
           imageUpload.setAttribute("multiple", maxFiles > 1 ? "" : null);
 
