@@ -73,7 +73,6 @@
       }
 
       .pricing-toggle {
-        max-width: 1200px;
         padding: 0 1rem;
       }
 
@@ -163,6 +162,8 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
+        display: flex;
+    flex-direction: column;
       }
 
       .preview-images {
@@ -238,6 +239,23 @@
           width: 45%;
         }
       }
+
+      .cta-heading {
+        font-size: 2.5rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-top: 0;
+        padding-top: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .cta-heading {
+          font-size: 2rem;
+        }
+      }
     </style>
     <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script>
   </head>
@@ -247,16 +265,15 @@
         <h1 class="display-4">
           Verwandle deine Fotos in einzigartige Cartoons
         </h1>
-        <p class="lead">
-          <b>Professionelle Cartoon Umwandlung<br />
-            schnell, einfach und günstig</b>
+        <p class="lead pt-2">
+          <b>schnell. einfach. günstig.</b>
         </p>
       </div>
     </section>
 
     <section class="examples">
       <div class="examples-container">
-        <h2 class="text-center mb-4">Beispiele unserer Cartoon Umwandlung</h2>
+        <h2 class="text-center mb-4">Beispiele unserer Cartoon Umwandlung:</h2>
         <div class="row g-4">
             <!-- Zweites Bildpaar -->
           <div class="col-12 col-lg-4">
@@ -324,7 +341,8 @@
 
     <section class="pricing-section">
       <div class="pricing-toggle text-center">
-        <h2 class="mb-4">1. Wähle dein Paket:</h2>
+        <h1 class="cta-heading mb-5">Bestelle jetzt deine Cartoon Fotos!</h1>
+        <h2 class="mb-2">1. Wähle dein Paket:</h2>
         <div class="btn-group" role="group">
           <input
             type="radio"
@@ -333,7 +351,7 @@
             id="single"
             checked
           />
-          <label class="btn btn-outline-primary" for="single"
+          <label class="btn btn-outline-primary" style="border-radius: 0px;" for="single"
             >1 Bild für 0,99€</label
           >
 
@@ -347,11 +365,12 @@
 
     <section class="upload-section">
       <div class="upload-container">
-        <h2 class="text-center mb-4" id="uploadTitle">2. Lade dein Bild hoch:</h2>
-        <div class="text-center">
+        <h2 class="text-center mb-2" id="uploadTitle">2. Lade dein Bild hoch:</h2>
+        <div class="text-center" style="display: flex; flex-direction: column; align-items: center;">
           <input
             type="file"
             class="form-control mb-3"
+            style="width: fit-content;"
             id="imageUpload"
             multiple
             accept="image/*"
@@ -359,28 +378,33 @@
           <div class="preview-images" id="imagePreview">
             <!-- Hier werden die Vorschaubilder angezeigt -->
           </div>
-          
+        </div>
+      </div>
+
+      <div class="upload-container" style="display: flex; flex-direction: column; align-items: center;" >
+        <h2 class="text-center mb-2" id="uploadTitle">3. An welche E-Mail sollen die Cartoon Bilder gesendet werden:</h2>
           <!-- Email Input -->
-          <div class="mb-3">
             <input
               type="email"
-              class="form-control"
+              class="form-control mb-3"
               id="emailInput"
               name="email"
-              placeholder="Ihre E-Mail-Adresse"
+              placeholder="E-Mail"
               required
               autocomplete="email"
+              style="width: fit-content;"
             />
-          </div>
+      </div>
 
+      <div class="upload-container pt-3 text-center" style="display: flex; flex-direction: column; align-items: center;" >
+          <h2 class="text-center mb-2" id="uploadTitle">4. Bestellen:</h2>
           <!-- AGB Checkbox -->
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="agbCheck" required>
+          <div class="mb-3 form-check" style="width: fit-content;">
+            <input type="checkbox" class="form-check-input" id="agbCheck"  required>
             <label class="form-check-label" for="agbCheck">
               Ich akzeptiere die <a href="rechtliches.html#agb" target="_blank">AGB</a> und <a href="rechtliches.html#datenschutz" target="_blank">Datenschutzerklärung</a>
             </label>
           </div>
-
           <button
             class="btn btn-primary btn-lg"
             id="submitButton"
@@ -395,8 +419,10 @@
               <span class="visually-hidden">Laden...</span>
             </span>
           </button>
-        </div>
       </div>
+
+      </div>
+
     </section>
 
     <!-- Nach dem Submit-Button in der upload-section -->
