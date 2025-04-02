@@ -152,15 +152,97 @@
       .step-item {
         text-align: center;
         margin-bottom: 2rem;
-        padding: 2rem;
+        padding: 2.5rem;
         background: white;
         border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+
+      .step-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .step-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       }
 
       .step-item h4 {
         color: #ff6b6b;
         margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .step-item p {
+        color: #666;
+        margin-bottom: 0;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 768px) {
+        .step-icon {
+          width: 70px;
+          height: 70px;
+          font-size: 2rem;
+        }
+        
+        .step-item {
+          padding: 2rem;
+          margin-bottom: 2rem;
+          transform: none;
+        }
+        
+        .col-12.col-md-4 {
+          margin-bottom: 2rem;
+        }
+        
+        .col-12.col-md-4:last-child {
+          margin-bottom: 0;
+        }
+        
+        .steps-container {
+          padding: 0 1.5rem;
+        }
+        
+        .steps {
+          padding: 3rem 0;
+        }
+        
+        .step-item:hover {
+          transform: translateY(-3px);
+        }
+        
+        .step-item:active {
+          transform: translateY(-2px);
+        }
+      }
+
+      @media (max-width: 375px) {
+        .step-item {
+          padding: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+        
+        .col-12.col-md-4 {
+          margin-bottom: 1.5rem;
+        }
+        
+        .step-icon {
+          width: 60px;
+          height: 60px;
+          font-size: 1.75rem;
+        }
       }
 
       .btn-primary {
@@ -455,22 +537,29 @@
         <div class="row">
           <div class="col-12 col-md-4">
             <div class="step-item">
+              <div class="step-icon">
+                <i class="fas fa-image"></i>
+              </div>
               <h4>1. Bilder hochladen & bezahlen</h4>
               <p>Lade deine Fotos hoch und bezahle sicher online</p>
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="step-item">
+              <div class="step-icon">
+                <i class="fas fa-paint-brush"></i>
+              </div>
               <h4>2. Wir erstellen deine Cartoons</h4>
               <p>Wir verwandeln deine Fotos mithilfe von KI in tolle Cartoons</p>
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="step-item">
+              <div class="step-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
               <h4>3. Fertige Bilder per E-Mail</h4>
-              <p>
-                Du erhältst deine Cartoon Bilder innerhalb von 24 Stunden per E-Mail
-              </p>
+              <p>Du erhältst deine Cartoon Bilder innerhalb von 24 Stunden per E-Mail</p>
             </div>
           </div>
         </div>
