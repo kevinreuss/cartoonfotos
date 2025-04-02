@@ -33,7 +33,49 @@
         background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
         text-align: center;
         color: white;
-        padding: 5rem 0;
+        padding: 6rem 0;
+      }
+
+      .hero-cta {
+        margin-top: 3rem;
+      }
+
+      .scroll-to-order {
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        border: none;
+        background: white;
+        color: #4ecdc4;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .scroll-to-order:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        background: white;
+        color: #ff6b6b;
+      }
+
+      .scroll-to-order .fa-arrow-down {
+        transition: transform 0.3s ease;
+      }
+
+      .scroll-to-order:hover .fa-arrow-down {
+        transform: translateY(4px);
+      }
+
+      @media (max-width: 768px) {
+        .hero-cta {
+          margin-top: 2rem;
+        }
+        
+        .scroll-to-order {
+          padding: 0.8rem 2rem;
+          font-size: 1.1rem;
+        }
       }
 
       .benefits {
@@ -270,12 +312,17 @@
         <p class="lead pt-2">
           <b>schnell. einfach. günstig.</b>
         </p>
+        <div class="hero-cta">
+          <button class="btn btn-light btn-lg scroll-to-order" onclick="scrollToOrder()">
+            Jetzt Cartoon Fotos bestellen
+            <i class="fas fa-arrow-down ms-2"></i>
+          </button>
+        </div>
       </div>
     </section>
 
     <section class="examples">
       <div class="examples-container">
-        <h2 class="text-center mb-4">Beispiele unserer Cartoon Umwandlung:</h2>
         <div class="row g-4">
             <!-- Zweites Bildpaar -->
           <div class="col-12 col-lg-4">
@@ -343,7 +390,7 @@
 
     <section class="pricing-section">
       <div class="pricing-toggle text-center">
-        <h1 class="cta-heading mb-5">Bestelle jetzt deine Cartoon Fotos!</h1>
+        <h1 class="cta-heading mb-5">Jetzt Cartoon Fotos bestellen</h1>
         <h2 class="mb-2">1. Wähle dein Paket:</h2>
         <div class="btn-group" role="group">
           <input
@@ -639,6 +686,15 @@
           validateForm();
         }
       });
+
+      // Smooth Scroll Funktion
+      function scrollToOrder() {
+        const orderSection = document.querySelector('.pricing-section');
+        orderSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     </script>
 
     
