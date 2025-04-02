@@ -121,18 +121,52 @@
         padding: 0 1rem;
       }
 
-      .btn-group {
+      .package-buttons {
         display: flex;
-        flex-direction: row;
+        justify-content: center;
         gap: 1rem;
-        width: 100%;
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
       }
 
-      @media (min-width: 768px) {
-        .btn-group {
-          width: auto;
+      .package-btn {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        border: 3px solid transparent;
+        color: white;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .package-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-check:checked + .package-btn {
+        border: 3px solid white;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Anpassung für den "Spare 20%" Text */
+      .package-btn small {
+        display: block;
+        font-size: 0.8rem;
+        opacity: 0.9;
+        margin-top: 0.3rem;
+      }
+
+      @media (max-width: 768px) {
+        .package-buttons {
+          padding: 0 1rem;
+        }
+
+        .package-btn {
+          padding: 0.8rem 1rem;
         }
       }
 
@@ -575,28 +609,19 @@
       </div>
     </section>
 
-
-
     <section class="upload-section">
       <div class="upload-container mb-4">
         <div class="pricing-toggle text-center">
           <h2 class="mb-2">Wähle Dein Paket:</h2>
-          <div class="btn-group" role="group">
-            <input
-              type="radio"
-              class="btn-check"
-              name="package"
-              id="single"
-              checked
-            />
-            <label class="btn btn-outline-primary" style="border-radius: 0px;" for="single"
-              >1 Bild für 0,99€</label
-            >
+          <div class="package-buttons">
+            <input type="radio" class="btn-check" name="package" id="single" checked />
+            <label class="package-btn" for="single">1 Bild für 0,99€</label>
 
             <input type="radio" class="btn-check" name="package" id="multi" />
-            <label class="btn btn-outline-primary" for="multi"
-              ><b>5 Bilder für 3,99€<b></b><br /><small>Spare 20%!</small></label
-            >
+            <label class="package-btn" for="multi">
+              <b>5 Bilder für 3,99€</b><br />
+              <small>Spare 20%!</small>
+            </label>
           </div>
         </div>
       </div>
